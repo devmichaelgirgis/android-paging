@@ -68,19 +68,22 @@ class SearchRepositoriesActivity : AppCompatActivity() {
     private fun initAdapter() {
         list.adapter = adapter
         viewModel.repoResult.observe(this) { result ->
-            when (result) {
-                is RepoSearchResult.Success -> {
-                    showEmptyList(result.data.isEmpty())
-                    adapter.submitList(result.data)
-                }
-                is RepoSearchResult.Error -> {
-                    Toast.makeText(
-                            this,
-                            "\uD83D\uDE28 Wooops $result.message}",
-                            Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
+            viewModel.repoResult
+            // TODO how to handle empty list?
+            // TODO how to handle error?
+//            when (result) {
+//                is RepoSearchResult.Success -> {
+//                    showEmptyList(result.data.isEmpty())
+//
+//                }
+//                is RepoSearchResult.Error -> {
+//                    Toast.makeText(
+//                            this,
+//                            "\uD83D\uDE28 Wooops $result.message}",
+//                            Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//            }
         }
     }
 
@@ -110,7 +113,8 @@ class SearchRepositoriesActivity : AppCompatActivity() {
             if (it.isNotEmpty()) {
                 list.scrollToPosition(0)
                 viewModel.searchRepo(it.toString())
-                adapter.submitList(null)
+                // TODO how to clear the list
+//                adapter.submitList(null)
             }
         }
     }
